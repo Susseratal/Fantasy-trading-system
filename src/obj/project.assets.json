@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/iain/Programming/Fantasy-trading-system/Fantasy-trading-system.csproj",
+      "projectUniqueName": "/home/iain/Programming/Fantasy-trading-system/src/Fantasy-trading-system.csproj",
       "projectName": "Fantasy-trading-system",
-      "projectPath": "/home/iain/Programming/Fantasy-trading-system/Fantasy-trading-system.csproj",
+      "projectPath": "/home/iain/Programming/Fantasy-trading-system/src/Fantasy-trading-system.csproj",
       "packagesPath": "/home/iain/.nuget/packages/",
-      "outputPath": "/home/iain/Programming/Fantasy-trading-system/obj/",
+      "outputPath": "/home/iain/Programming/Fantasy-trading-system/src/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/iain/.nuget/NuGet/NuGet.Config"

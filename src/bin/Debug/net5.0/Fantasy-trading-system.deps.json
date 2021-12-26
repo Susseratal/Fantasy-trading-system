@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Fantasy-trading-system/1.0.0": {
+        "runtime": {
+          "Fantasy-trading-system.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Fantasy-trading-system/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

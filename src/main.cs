@@ -4,8 +4,6 @@ using Convert = System.Convert;
 using Collections = System.Collections;
 using Generic = System.Collections.Generic;
 
-// zf and zo to fold and open chunks of code respectively
-
 namespace Game
 {
     public class Item
@@ -20,11 +18,16 @@ namespace Game
             weight = weightInit;
             val = valInit;
         }
-    }
 
-    class Program
-    {
-        public static void listItems(Generic.IEnumerable<Item> list)
+        public static Item[] makeItems()
+        {
+            var grain = new Item("Grain", 10, 20); 
+            var fish = new Item("Fish", 1, 2);
+            Item[] items = new Item[2] {grain, fish};
+            return items;
+        }
+
+        public static void listItems(Generic.IEnumerable<Item> list) // this could be better, but it works fine for now
         {
             int itemVar = 1;
             foreach (var i in list)
@@ -34,25 +37,24 @@ namespace Game
             }
         }
 
-        public static Item getItem(Generic.IEnumerable<Item> list)
+        public static Item getItem(Item[] list)
         {
             Console.WriteLine("Select item number: ");
             string itemStr = Console.ReadLine();
             int item = Convert.ToInt32(itemStr);
             item = (item - 1);
-            Item selectedItem = list[item];
+            Item selectedItem = list[item]; // some type issue here
             return selectedItem;
         }
+    }
 
+    class Program
+    {
         static void Main(string[] args)
         {
-            var grain = new Item("Grain", 10, 20); 
-            var fish = new Item("Fish", 1, 2);
-            Item[] items = new Item[2] {grain, fish};
-
+            Item[] items = Item.makeItems(); // make the array of items
             var inventory = new Generic.List<Item>(); // initialise an empty list than can have things added to it
 
-            // Initialise some items and add them to an array
             while (true)
             {
                 Console.WriteLine("Enter command");
@@ -63,24 +65,23 @@ namespace Game
                     case "list items":
                     case "check items":
                     case "items":
-                        listItems(items);
+                        Item.listItems(items);
                         break;
 
                     case "check item":
-                        Console.WriteLine("Select item number: ");
-                        Item selectedItem = new getItem(items); // Figure out this function call come morning
-                        Console.WriteLine("Name: " + selectedItem.name);
-                        Console.WriteLine(selectedItem.weight + " grams");
-                        Console.WriteLine(selectedItem.val + " gold \n");
+                        Item selectedCheck = Item.getItem(items); 
+                        Console.WriteLine("Name: " + selectedCheck.name);
+                        Console.WriteLine("Weight: " + selectedCheck.weight + " gram(s)");
+                        Console.WriteLine("Value: " + selectedCheck.val + " gold \n");
                         break;
 
-                    case "add to inventory":
-                        listItems(items);
-                        Item selectedItem = new getItem(items);
+                    case "buy item":
+                        Item.listItems(items);
+                        Item selectedItem = Item.getItem(items);
                         inventory.Add(selectedItem);
                         break;
 
-                    case "check inventory":
+                    case "inventory":
                         foreach (var i in inventory)
                         {
                             Console.WriteLine(i.name);

@@ -1,6 +1,14 @@
-Fantasy trading system changelog
+Fantasy trading system changelog  
 Done: 
-        - [x] Basic system set up
+        - [x] Basic system set up  
+        - [x] Create items list
+        - [x] Create inventory
+        - [x] Add items to inventory
+        - [x] Check inventory
 
 To do:
-        - [ ] Write the rest of the changelog
+        - [ ] Remove items from inventory
+        - [ ] Items cost gold to buy
+        - [ ] Neater inventory
+        - [ ] Sell items
+        - [ ] Extend items list

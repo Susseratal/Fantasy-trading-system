@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "64uE5GJgpMAN6MS3lLpg9kexgHIx0vm3iPhVc5PXCnB3lYJj3AsnLHuJKbLsL+DDuQVdc8eAvPznFIujVbL05Q==",
+  "dgSpecHash": "4nmNOzXkiOZkAVopZbD5xObXKP8ONewdbvOepANyT1k1KOCx+wu2B608Xb3PKFM2nmb2lv3e9s6Ec8+Q2IouJA==",
   "success": true,
-  "projectFilePath": "/home/iain/Programming/Fantasy-trading-system/Fantasy-trading-system.csproj",
+  "projectFilePath": "/home/iain/Programming/Fantasy-trading-system/src/Fantasy-trading-system.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
