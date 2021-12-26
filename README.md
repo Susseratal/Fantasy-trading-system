@@ -1,16 +1,11 @@
 Fantasy trading system README  
 <!-- language: lang-none -->
-         _____ ____      _    ____ ___ _   _  ____
-        |_   _|  _ \    / \  |  _ \_ _| \ | |/ ___|
-          | | | |_) |  / _ \ | | | | ||  \| | |  _
-          | | |  _ <  / ___ \| |_| | || |\  | |_| |
-          |_| |_| \_\/_/   \_\____/___|_| \_|\____|
-
-         ______   ______ _____ _____ __  __
-        / ___\ \ / / ___|_   _| ____|  \/  |
-        \___ \\ V /\___ \ | | |  _| | |\/| |
-         ___) || |  ___) || | | |___| |  | |
-        |____/ |_| |____/ |_| |_____|_|  |_|
+         _                 _ _                             _
+        | |_ _ __ __ _  __| (_)_ __   __ _   ___ _   _ ___| |_ ___ _ __ ___
+        | __| '__/ _` |/ _` | | '_ \ / _` | / __| | | / __| __/ _ \ '_ ` _ \
+        | |_| | | (_| | (_| | | | | | (_| | \__ \ |_| \__ \ ||  __/ | | | | |
+         \__|_|  \__,_|\__,_|_|_| |_|\__, | |___/\__, |___/\__\___|_| |_| |_|
+                                     |___/       |___/
 
 This is just a fun little project I wanted to work on over christmas after playing a bunch of Elite, and Oregon Trail, and other such games.  
 The idea was to create a little system that allowed you to buy and sell things as if you were a fantasy shopkeeper.  
