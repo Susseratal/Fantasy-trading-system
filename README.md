@@ -11,6 +11,6 @@ This is just a fun little project I wanted to work on over christmas after playi
 The idea was to create a little system that allowed you to buy and sell things as if you were a fantasy shopkeeper.  
 Definitely not the most complex system I've ever put together, but that's ok. It's not going to become anything interesting - it's more just for my own personal benefit than anything else. 
 
-Either way, hope you enjoy having a little play around with this. Projects like this always make me slightly nostalgic for things like the original Elite, Oregon Trail, Rogue, Nethack and things like that. Green on black text somehow still stimulates my imagination more than the finest 3D graphics the world can muster.  
+Either way, hope you enjoy having a little play around with this. Projects like this always make me slightly nostalgic for things like the original Elite, Oregon Trail and things like that.  
 Cheers  
 ~Iain xx
