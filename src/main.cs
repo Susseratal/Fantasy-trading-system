@@ -13,6 +13,11 @@ using Threading = System.Threading;
 using Convert = System.Convert;
 using Collections = System.Collections;
 using Generic = System.Collections.Generic;
+using Diagnostics = System.Diagnostics;
+using Process = System.Diagnostics.Process;
+using Globalization = System.Globalization;
+using TextInfo = System.Globalization.TextInfo;
+using Figlet = WenceyWang.FIGlet;
 
 namespace Game
 {
@@ -60,10 +65,56 @@ namespace Game
 
     class Program
     {
+        public static void delayPrint(string text)
+        {
+            foreach (var c in text)
+            {
+                Console.Write(c);
+                Threading.Thread.Sleep(60);
+            }
+            Console.Write("\n");
+        }
+
+        static string opening()
+        {
+            TextInfo tI = new Globalization.CultureInfo("en-gb",false).TextInfo;
+
+            // exposit some stuff
+            delayPrint("It's a tough world out there, and we're all just trying to make a living.\nYou've inherited your father's general goods shop.\nAccordingly, you repaint the sign with your name.\n");
+            delayPrint("What is your name? "); 
+
+            // Get the player's name
+            string name = Console.ReadLine(); 
+            name = tI.ToTitleCase(name); 
+            delayPrint("Welcome to... ");
+
+            // Figlet some stuff
+            var figletText = new Figlet.AsciiArt(name + "'s General Goods"); 
+            Console.WriteLine(figletText.ToString() + "\n"); 
+
+            // Time for some more exposition
+            delayPrint("Your father's words ring in your ears.\n'It's an important business you know, lots of wandering adventurer types come through here.'");
+
+            return name;
+        }
+
         static void Main(string[] args)
         {
-            Item[] items = Item.makeItems(); // make the array of items
-            var inventory = new Generic.List<Item>(); // initialise an empty list than can have things added to it
+            // construct some basic stuff
+            Item[] items = Item.makeItems(); 
+            var inventory = new Generic.Dictionary<Item, int>(); 
+
+            // add all of the items to the players inventory with a quantity of 0
+            foreach (var i in items)
+            {
+                inventory.Add(i, 0);
+            }
+
+            // Create a default username so if for some reason the opening doesn't run, there's still a username
+            string name = "username";
+            int gold = 200;
+            // name = opening();
+            
 
             while (true)
             {
@@ -73,7 +124,6 @@ namespace Game
                 switch(command)
                 {
                     case "list items":
-                    case "check items":
                     case "items":
                         Item.listItems(items);
                         break;
@@ -88,13 +138,15 @@ namespace Game
                     case "buy item":
                         Item.listItems(items);
                         Item selectedItem = Item.getItem(items);
-                        inventory.Add(selectedItem);
+                        inventory.Add(selectedItem, 1);
                         break;
 
                     case "inventory":
+                        Console.WriteLine("Name | Quantity owned | Weight | Value"); // need to fix the formatting on this
+                        Console.WriteLine("--------------------------------------");
                         foreach (var i in inventory)
                         {
-                            Console.WriteLine(i.name);
+                            Console.WriteLine(i.Key.name + " | " + i.Value.ToString() + " | " + i.Key.weight + " | " + i.Key.val);
                         }
                         break;
 

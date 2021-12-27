@@ -5,6 +5,9 @@ Done:
         - [x] Create inventory
         - [x] Add items to inventory
         - [x] Check inventory
+        - [x] Updated intro and reformatted some code
+        - [x] added delayPrint function, which types things out nicely
+        - [x] Created figlet stuff
 
 To do:
         - [ ] Remove items from inventory

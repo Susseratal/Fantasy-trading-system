@@ -19,3 +19,6 @@
 /home/iain/Programming/Fantasy-trading-system/src/obj/Debug/net5.0/ref/Fantasy-trading-system.dll
 /home/iain/Programming/Fantasy-trading-system/src/obj/Debug/net5.0/Fantasy-trading-system.pdb
 /home/iain/Programming/Fantasy-trading-system/src/obj/Debug/net5.0/Fantasy-trading-system.genruntimeconfig.cache
+/home/iain/Programming/Fantasy-trading-system/src/bin/Debug/net5.0/WenceyWang.FIGlet.dll
+/home/iain/Programming/Fantasy-trading-system/src/bin/Debug/net5.0/JetBrains.Annotations.dll
+/home/iain/Programming/Fantasy-trading-system/src/obj/Debug/net5.0/Fantasy-trading-system.csproj.CopyComplete

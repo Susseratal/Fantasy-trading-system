@@ -37,6 +37,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "FIGlet.Net": {
+              "target": "Package",
+              "version": "[1.1.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

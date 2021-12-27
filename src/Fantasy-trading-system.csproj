@@ -6,4 +6,8 @@
     <RootNamespace>Fantasy_trading_system</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FIGlet.Net" Version="1.1.2" />
+  </ItemGroup>
+
 </Project>
