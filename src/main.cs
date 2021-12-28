@@ -75,31 +75,11 @@ namespace Game
             Console.Write("\n");
         }
 
-        static string opening()
-        {
-            TextInfo tI = new Globalization.CultureInfo("en-gb",false).TextInfo;
-
-            // exposit some stuff
-            delayPrint("It's a tough world out there, and we're all just trying to make a living.\nYou've inherited your father's general goods shop.\nAccordingly, you repaint the sign with your name.\n");
-            delayPrint("What is your name? "); 
-
-            // Get the player's name
-            string name = Console.ReadLine(); 
-            name = tI.ToTitleCase(name); 
-            delayPrint("Welcome to... ");
-
-            // Figlet some stuff
-            var figletText = new Figlet.AsciiArt(name + "'s General Goods"); 
-            Console.WriteLine(figletText.ToString() + "\n"); 
-
-            // Time for some more exposition
-            delayPrint("Your father's words ring in your ears.\n'It's an important business you know, lots of wandering adventurer types come through here.'");
-
-            return name;
-        }
-
         static void Main(string[] args)
         {
+            // This is all very messy 
+            TextInfo tI = new Globalization.CultureInfo("en-gb",false).TextInfo;
+
             // construct some basic stuff
             Item[] items = Item.makeItems(); 
             var inventory = new Generic.Dictionary<Item, int>(); 
@@ -112,9 +92,28 @@ namespace Game
 
             // Create a default username so if for some reason the opening doesn't run, there's still a username
             string name = "username";
-            int gold = 200;
-            // name = opening();
-            
+            int gold = 100;
+
+            // exposit some stuff
+            delayPrint("It's a tough world out there, and we're all just trying to make a living.\nYou've inherited your father's general goods shop.\nAccordingly, you repaint the sign with your name.\n");
+
+            // get the player's name
+            delayPrint("What is your name? "); 
+            name = Console.ReadLine(); 
+            name = tI.ToTitleCase(name); 
+            delayPrint("Excellent, and what did you call the shop? (This defaults to 'username's general goods' if left blank)");
+            string shop = Console.ReadLine();
+            if (shop == ""){shop = (name + "'s General Goods");}
+            else {shop = tI.ToTitleCase(shop);}
+
+            delayPrint("Welcome to... ");
+
+            // Figlet some stuff
+            var figletText = new Figlet.AsciiArt(shop); 
+            Console.WriteLine(figletText.ToString() + "\n"); 
+
+            // Time for some more exposition
+            delayPrint("Your father's words ring in your ears.\n'It's an important business you know, lots of wandering adventurer types come through here.'");
 
             while (true)
             {
@@ -138,15 +137,18 @@ namespace Game
                     case "buy item":
                         Item.listItems(items);
                         Item selectedItem = Item.getItem(items);
-                        inventory.Add(selectedItem, 1);
+                        gold = gold - selectedItem.val;
+                        Console.WriteLine("Gold: " + gold); 
+                        inventory[selectedItem]++;
+                        // This line doesn't work because inventory cannot find selectedItem
                         break;
 
                     case "inventory":
-                        Console.WriteLine("Name | Quantity owned | Weight | Value"); // need to fix the formatting on this
-                        Console.WriteLine("--------------------------------------");
+                        Console.WriteLine("Item Name | Value | Weight | Amount held");
+                        Console.WriteLine("-----------------------------------------");
                         foreach (var i in inventory)
                         {
-                            Console.WriteLine(i.Key.name + " | " + i.Value.ToString() + " | " + i.Key.weight + " | " + i.Key.val);
+                            Console.WriteLine(i.Key.name + "   |   " + i.Key.val + "   |   " + i.Key.weight + "   |   " + i.Value.ToString()); 
                         }
                         break;
 
