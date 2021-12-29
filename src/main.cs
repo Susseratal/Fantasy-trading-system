@@ -70,9 +70,15 @@ namespace Game
             foreach (var c in text)
             {
                 Console.Write(c);
-                Threading.Thread.Sleep(60);
+                Threading.Thread.Sleep(30);
             }
             Console.Write("\n");
+        }
+
+        public static void showHelp()
+        {
+            delayPrint("List of Commands:\nInventory - see how much of every item you have\nbuy item - purchase an item\ncheck item - check the info of an item\nquit - close the game\nPress the return key to wait without doing anything");
+            delayPrint("To show this message again, type 'help'");
         }
 
         static void Main(string[] args)
@@ -95,7 +101,7 @@ namespace Game
             int gold = 100;
 
             // exposit some stuff
-            delayPrint("It's a tough world out there, and we're all just trying to make a living.\nYou've inherited your father's general goods shop.\nAccordingly, you repaint the sign with your name.\n");
+            delayPrint("It's a tough world out there, and we're all just trying to make a living.\nFollowing his passing, you've inherited your father's general goods shop.\nAccordingly, you repaint the sign with your name.\n");
 
             // get the player's name
             delayPrint("What is your name? "); 
@@ -114,10 +120,11 @@ namespace Game
 
             // Time for some more exposition
             delayPrint("Your father's words ring in your ears.\n'It's an important business you know, lots of wandering adventurer types come through here.'");
+            showHelp();
 
             while (true)
             {
-                Console.WriteLine("Enter command");
+                Console.WriteLine("What would you like to do? ");
                 string command = Console.ReadLine();
                 command = command.ToLower();
                 switch(command)
@@ -140,7 +147,6 @@ namespace Game
                         gold = gold - selectedItem.val;
                         Console.WriteLine("Gold: " + gold); 
                         inventory[selectedItem]++;
-                        // This line doesn't work because inventory cannot find selectedItem
                         break;
 
                     case "inventory":
@@ -150,6 +156,14 @@ namespace Game
                         {
                             Console.WriteLine(i.Key.name + "   |   " + i.Key.val + "   |   " + i.Key.weight + "   |   " + i.Value.ToString()); 
                         }
+                        break;
+
+                    case "help":
+                        showHelp();
+                        break;
+
+                    case "":
+                        delayPrint("You wait for 5 minutes");
                         break;
 
                     case "quit":

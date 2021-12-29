@@ -8,10 +8,11 @@ Done:
         - [x] Updated intro and reformatted some code
         - [x] added delayPrint function, which types things out nicely
         - [x] Created figlet stuff
+        - [x] Items cost gold to buy
 
 To do:
-        - [ ] Remove items from inventory
-        - [ ] Items cost gold to buy
-        - [ ] Neater inventory
         - [ ] Sell items
-        - [ ] Extend items list
+        - [ ] Format inventory properly
+        - [ ] Sell items
+        - [ ] Add day and time
+        - [ ] Add saving to avoid the tutorial
