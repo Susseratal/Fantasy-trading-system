@@ -27,22 +27,23 @@ namespace Game
         public int weight;
         public int val;
 
-        public Item(string nameInit, int weightInit, int valInit) // This is a constructor
+        public Item(string nameInit, int valInit) 
         {
             name = nameInit;
-            weight = weightInit;
             val = valInit;
         }
 
         public static Item[] makeItems()
         {
-            var grain = new Item("Grain", 10, 20); 
-            var fish = new Item("Fish", 1, 2);
-            Item[] items = new Item[2] {grain, fish};
+            var grain = new Item("Grain", 20); 
+            var fish = new Item("Fish", 2);
+            var meat = new Item("Meat", 5);
+            var timbers = new Item("Timbers", 8);
+            Item[] items = new Item[4] {grain, fish, meat, timbers};
             return items;
         }
 
-        public static void listItems(Generic.IEnumerable<Item> list) // this could be better, but it works fine for now
+        public static void listItems(Generic.IEnumerable<Item> list) 
         {
             int itemVar = 1;
             foreach (var i in list)
@@ -58,7 +59,7 @@ namespace Game
             string itemStr = Console.ReadLine();
             int item = Convert.ToInt32(itemStr);
             item = (item - 1);
-            Item selectedItem = list[item]; // some type issue here
+            Item selectedItem = list[item]; 
             return selectedItem;
         }
     }
@@ -81,28 +82,35 @@ namespace Game
             delayPrint("To show this message again, type 'help'");
         }
 
+        public static void showInventory(Generic.Dictionary<Item, int> inv, int gold)
+        {
+            Console.WriteLine("\nGold: " + gold);
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("|     Item Name     |      Value     |     Amount held     |");
+            Console.WriteLine("------------------------------------------------------------");
+            foreach (var i in inv)
+            {
+                Console.WriteLine("{0,0} {1,11} {0,7} {2,8} {0,7} {3,10} {0,10}",
+                        "|",
+                        i.Key.name,
+                        i.Key.val,
+                        i.Value.ToString());
+            }
+            Console.WriteLine("------------------------------------------------------------\n");
+        }
+
         static void Main(string[] args)
         {
-            // This is all very messy 
             TextInfo tI = new Globalization.CultureInfo("en-gb",false).TextInfo;
-
-            // construct some basic stuff
             Item[] items = Item.makeItems(); 
             var inventory = new Generic.Dictionary<Item, int>(); 
-
-            // add all of the items to the players inventory with a quantity of 0
             foreach (var i in items)
             {
                 inventory.Add(i, 0);
             }
-
-            // Create a default username so if for some reason the opening doesn't run, there's still a username
             int gold = 100;
-
-            // exposit some stuff
             // delayPrint("It's a tough world out there, and we're all just trying to make a living.\nFollowing his passing, you've inherited your father's general goods shop.\nAccordingly, you repaint the sign with your name.\n");
 
-            // get the player's name
             delayPrint("What is your name? "); 
             string name = Console.ReadLine(); 
             if (name == "") {name = "Username";}
@@ -112,14 +120,10 @@ namespace Game
             string shop = Console.ReadLine();
             if (shop == ""){shop = (name + "'s General Goods");}
             else {shop = tI.ToTitleCase(shop);}
-
             delayPrint("Welcome to... ");
-
-            // Figlet some stuff
             var figletText = new Figlet.AsciiArt(shop); 
             Console.WriteLine(figletText.ToString() + "\n"); 
 
-            // Time for some more exposition
             // delayPrint("Your father's words ring in your ears.\n'It's an important business you know, lots of wandering adventurer types come through here.'");
             // showHelp();
 
@@ -138,33 +142,31 @@ namespace Game
                     case "check item":
                         Item selectedCheck = Item.getItem(items); 
                             Console.WriteLine("Name: " + selectedCheck.name);
-                        Console.WriteLine("Weight: " + selectedCheck.weight + " gram(s)");
                         Console.WriteLine("Value: " + selectedCheck.val + " gold \n");
                         break;
 
                     case "buy item":
+                    case "buy":
                         Item.listItems(items);
                         Item selectedItem = Item.getItem(items);
-                        gold = gold - selectedItem.val;
+                        delayPrint("How many would you like to buy: ");
+                        string amountStr = Console.ReadLine();
+                        int amount = Convert.ToInt32(amountStr);
+                        gold = (gold - (selectedItem.val*amount));
                         Console.WriteLine("Gold: " + gold); 
-                        inventory[selectedItem]++;
+                        inventory[selectedItem] = (inventory[selectedItem]+amount);
+                        break;
+
+                    case "sell item":
+                    case "sell":
+                        showInventory(inventory, gold);
+                        Item.listItems(items);
+                        // something about an if (soldItem.Value - amount >= 0 {fucking don't lol})
                         break;
 
                     case "inventory":
                     case "inv":
-                        Console.WriteLine("-----------------------------------------------------------------------------");
-                        Console.WriteLine("|     Item Name     |      Value     |     Weight     |     Amount held     |");
-                        Console.WriteLine("-----------------------------------------------------------------------------");
-                        foreach (var i in inventory)
-                        {
-                            Console.WriteLine("{0,0} {1,11} {0,7} {2,8} {0,7} {3,8} {0,7} {4,10} {0,10}",
-                                    "|",
-                                    i.Key.name,
-                                    i.Key.val,
-                                    i.Key.weight,
-                                    i.Value.ToString());
-                        }
-                        Console.WriteLine("-----------------------------------------------------------------------------");
+                        showInventory(inventory, gold);
                         break;
 
                     case "help":

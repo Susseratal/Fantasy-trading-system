@@ -9,7 +9,8 @@ Done:
         - [x] added delayPrint function, which types things out nicely
         - [x] Created figlet stuff
         - [x] Items cost gold to buy
-        - [x] Format inventory properly
+        - [x] Format inventory properly  
+        - [x] Started expanding the items list
 
 To do:
         - [ ] Sell items
