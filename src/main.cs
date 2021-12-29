@@ -157,7 +157,7 @@ namespace Game
                         Console.WriteLine("-----------------------------------------------------------------------------");
                         foreach (var i in inventory)
                         {
-                            Console.WriteLine("{0,0} {1,11} {0,7} {2,8} {0,7} {3,8} {0,7} {4,8} {0,12}",
+                            Console.WriteLine("{0,0} {1,11} {0,7} {2,8} {0,7} {3,8} {0,7} {4,10} {0,10}",
                                     "|",
                                     i.Key.name,
                                     i.Key.val,
