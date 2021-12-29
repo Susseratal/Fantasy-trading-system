@@ -97,17 +97,18 @@ namespace Game
             }
 
             // Create a default username so if for some reason the opening doesn't run, there's still a username
-            string name = "username";
             int gold = 100;
 
             // exposit some stuff
-            delayPrint("It's a tough world out there, and we're all just trying to make a living.\nFollowing his passing, you've inherited your father's general goods shop.\nAccordingly, you repaint the sign with your name.\n");
+            // delayPrint("It's a tough world out there, and we're all just trying to make a living.\nFollowing his passing, you've inherited your father's general goods shop.\nAccordingly, you repaint the sign with your name.\n");
 
             // get the player's name
             delayPrint("What is your name? "); 
-            name = Console.ReadLine(); 
-            name = tI.ToTitleCase(name); 
-            delayPrint("Excellent, and what did you call the shop? (This defaults to 'username's general goods' if left blank)");
+            string name = Console.ReadLine(); 
+            if (name == "") {name = "Username";}
+            else {name = tI.ToTitleCase(name);}
+
+            delayPrint("Excellent, and what did you call the shop?");
             string shop = Console.ReadLine();
             if (shop == ""){shop = (name + "'s General Goods");}
             else {shop = tI.ToTitleCase(shop);}
@@ -119,8 +120,8 @@ namespace Game
             Console.WriteLine(figletText.ToString() + "\n"); 
 
             // Time for some more exposition
-            delayPrint("Your father's words ring in your ears.\n'It's an important business you know, lots of wandering adventurer types come through here.'");
-            showHelp();
+            // delayPrint("Your father's words ring in your ears.\n'It's an important business you know, lots of wandering adventurer types come through here.'");
+            // showHelp();
 
             while (true)
             {
@@ -136,7 +137,7 @@ namespace Game
 
                     case "check item":
                         Item selectedCheck = Item.getItem(items); 
-                        Console.WriteLine("Name: " + selectedCheck.name);
+                            Console.WriteLine("Name: " + selectedCheck.name);
                         Console.WriteLine("Weight: " + selectedCheck.weight + " gram(s)");
                         Console.WriteLine("Value: " + selectedCheck.val + " gold \n");
                         break;
@@ -150,12 +151,20 @@ namespace Game
                         break;
 
                     case "inventory":
-                        Console.WriteLine("Item Name | Value | Weight | Amount held");
-                        Console.WriteLine("-----------------------------------------");
+                    case "inv":
+                        Console.WriteLine("-----------------------------------------------------------------------------");
+                        Console.WriteLine("|     Item Name     |      Value     |     Weight     |     Amount held     |");
+                        Console.WriteLine("-----------------------------------------------------------------------------");
                         foreach (var i in inventory)
                         {
-                            Console.WriteLine(i.Key.name + "   |   " + i.Key.val + "   |   " + i.Key.weight + "   |   " + i.Value.ToString()); 
+                            Console.WriteLine("{0,0} {1,11} {0,7} {2,8} {0,7} {3,8} {0,7} {4,8} {0,12}",
+                                    "|",
+                                    i.Key.name,
+                                    i.Key.val,
+                                    i.Key.weight,
+                                    i.Value.ToString());
                         }
+                        Console.WriteLine("-----------------------------------------------------------------------------");
                         break;
 
                     case "help":
@@ -172,7 +181,7 @@ namespace Game
                         break;
                             
                     default:
-                        Console.WriteLine("Your command was: " + "\n" + command + "\n");
+                        Console.WriteLine("Unrecognised option");
                         break;
                 }
             }

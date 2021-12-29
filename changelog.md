@@ -9,10 +9,11 @@ Done:
         - [x] added delayPrint function, which types things out nicely
         - [x] Created figlet stuff
         - [x] Items cost gold to buy
+        - [x] Format inventory properly
 
 To do:
         - [ ] Sell items
-        - [ ] Format inventory properly
-        - [ ] Sell items
         - [ ] Add day and time
         - [ ] Add saving to avoid the tutorial
+        - [ ] Add a deck of random events and NPC's to actually sell to
+        - [ ] Create a proper economy idea with some basic necessities
