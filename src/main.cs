@@ -17,7 +17,11 @@ using Diagnostics = System.Diagnostics;
 using Process = System.Diagnostics.Process;
 using Globalization = System.Globalization;
 using TextInfo = System.Globalization.TextInfo;
+using Json = System.Text.Json;
+using Serialization = System.Text.Json.Serialization;
+using IO = System.IO;
 using Figlet = WenceyWang.FIGlet;
+using Data = System.Data;
 
 namespace Game
 {
@@ -82,8 +86,10 @@ namespace Game
             delayPrint("To show this message again, type 'help'");
         }
 
-        public static void showInventory(Generic.Dictionary<Item, int> inv, int gold)
+        public static void showInventory(Generic.Dictionary<Item, int> inv, int gold, string name, string shop)
         {
+            delayPrint("Name: " + name);
+            delayPrint("Shop: " + shop);
             delayPrint("\nYou have " + gold + " gold");
             Console.WriteLine("------------------------------------------------------------");
             Console.WriteLine("|     Item Name     |      Value     |     Amount held     |");
@@ -99,6 +105,17 @@ namespace Game
             Console.WriteLine("------------------------------------------------------------\n");
         }
 
+        static void save(string name, string shopName)
+        {
+            // Item.listItems(items);
+            // Item saveSlot = Item.getItem(items);
+            Generic.List<string> _data = new Generic.List<string>();
+            _data.Add(name);
+            _data.Add(shopName);
+            string json = Json.JsonSerializer.Serialize(_data);
+            IO.File.WriteAllText(@"./file.json", json);
+        }
+
         static void Main(string[] args)
         {
             TextInfo tI = new Globalization.CultureInfo("en-gb",false).TextInfo;
@@ -110,9 +127,11 @@ namespace Game
             }
             int gold = 100;
 
-            bool x = true;
-            if (x == false)
-            {
+            if (IO.File.Exists("./file.json")) {
+                // figure out how to read from the file and pull data from it
+            }
+
+            else{
                 delayPrint("It's a tough world out there, and we're all just trying to make a living.\nFollowing his passing, you've inherited your father's general goods shop.\nAccordingly, you repaint the sign with your name.\n");
 
                 delayPrint("What is your name? "); 
@@ -127,10 +146,10 @@ namespace Game
                 delayPrint("Welcome to... ");
                 var figletText = new Figlet.AsciiArt(shop); 
                 Console.WriteLine(figletText.ToString() + "\n"); 
+                save(name, shop);
 
                 delayPrint("Your father's words ring in your ears.\n'It's an important business you know, lots of wandering adventurer types come through here.'");
-                showHelp();
-            }
+                showHelp();}
 
             while (true)
             {
@@ -152,7 +171,7 @@ namespace Game
 
                     case "buy item":
                     case "buy":
-                        showInventory(inventory, gold);
+                        showInventory(inventory, gold, name, shop);
                         Item.listItems(items);
                         Item selectedItem = Item.getItem(items);
                         delayPrint("How many would you like to buy: ");
@@ -169,7 +188,7 @@ namespace Game
 
                     case "sell item":
                     case "sell":
-                        showInventory(inventory, gold);
+                        showInventory(inventory, gold, name, shop);
                         Item.listItems(items);
                         // Item selectedItem = Item.getItem(items);
                         // something about an if (soldItem.Value - amount >= 0 {fucking don't lol})
@@ -177,11 +196,14 @@ namespace Game
 
                     case "inventory":
                     case "inv":
-                        showInventory(inventory, gold);
+                        showInventory(inventory, gold, name, shop);
                         break;
 
                     case "help":
                         showHelp();
+                        break;
+
+                    case "save":
                         break;
 
                     case "":
