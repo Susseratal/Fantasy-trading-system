@@ -1,5 +1,6 @@
 Fantasy trading system changelog  
 Done: 
+
         - [x] Basic system set up  
         - [x] Create items list
         - [x] Create inventory
@@ -15,6 +16,7 @@ Done:
         - [x] minor formatting changes
 
 To do:
+
         - [ ] Sell items
         - [ ] Add day and time
         - [ ] Add saving to avoid the tutorial
