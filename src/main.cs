@@ -48,7 +48,7 @@ namespace Game
             int itemVar = 1;
             foreach (var i in list)
             {
-                Console.WriteLine(itemVar + ": " + i.name);
+                Program.delayPrint(itemVar + ": " + i.name);
                 itemVar++;
             }
         }
@@ -84,7 +84,7 @@ namespace Game
 
         public static void showInventory(Generic.Dictionary<Item, int> inv, int gold)
         {
-            Console.WriteLine("\nGold: " + gold);
+            delayPrint("\nYou have " + gold + " gold");
             Console.WriteLine("------------------------------------------------------------");
             Console.WriteLine("|     Item Name     |      Value     |     Amount held     |");
             Console.WriteLine("------------------------------------------------------------");
@@ -109,23 +109,28 @@ namespace Game
                 inventory.Add(i, 0);
             }
             int gold = 100;
-            // delayPrint("It's a tough world out there, and we're all just trying to make a living.\nFollowing his passing, you've inherited your father's general goods shop.\nAccordingly, you repaint the sign with your name.\n");
 
-            delayPrint("What is your name? "); 
-            string name = Console.ReadLine(); 
-            if (name == "") {name = "Username";}
-            else {name = tI.ToTitleCase(name);}
+            bool x = true;
+            if (x == false)
+            {
+                delayPrint("It's a tough world out there, and we're all just trying to make a living.\nFollowing his passing, you've inherited your father's general goods shop.\nAccordingly, you repaint the sign with your name.\n");
 
-            delayPrint("Excellent, and what did you call the shop?");
-            string shop = Console.ReadLine();
-            if (shop == ""){shop = (name + "'s General Goods");}
-            else {shop = tI.ToTitleCase(shop);}
-            delayPrint("Welcome to... ");
-            var figletText = new Figlet.AsciiArt(shop); 
-            Console.WriteLine(figletText.ToString() + "\n"); 
+                delayPrint("What is your name? "); 
+                string name = Console.ReadLine(); 
+                if (name == "") {name = "Username";}
+                else {name = tI.ToTitleCase(name);}
 
-            // delayPrint("Your father's words ring in your ears.\n'It's an important business you know, lots of wandering adventurer types come through here.'");
-            // showHelp();
+                delayPrint("Excellent, and what did you call the shop?");
+                string shop = Console.ReadLine();
+                if (shop == ""){shop = (name + "'s General Goods");}
+                else {shop = tI.ToTitleCase(shop);}
+                delayPrint("Welcome to... ");
+                var figletText = new Figlet.AsciiArt(shop); 
+                Console.WriteLine(figletText.ToString() + "\n"); 
+
+                delayPrint("Your father's words ring in your ears.\n'It's an important business you know, lots of wandering adventurer types come through here.'");
+                showHelp();
+            }
 
             while (true)
             {
@@ -147,20 +152,26 @@ namespace Game
 
                     case "buy item":
                     case "buy":
+                        showInventory(inventory, gold);
                         Item.listItems(items);
                         Item selectedItem = Item.getItem(items);
                         delayPrint("How many would you like to buy: ");
                         string amountStr = Console.ReadLine();
                         int amount = Convert.ToInt32(amountStr);
-                        gold = (gold - (selectedItem.val*amount));
-                        Console.WriteLine("Gold: " + gold); 
-                        inventory[selectedItem] = (inventory[selectedItem]+amount);
+                        if (gold - (selectedItem.val*amount) <= 0) {delayPrint("You don't have enough gold for that");}
+                        else 
+                        {
+                            gold = (gold - (selectedItem.val*amount));
+                            Console.WriteLine("Gold: " + gold); 
+                            inventory[selectedItem] = (inventory[selectedItem]+amount);
+                        }
                         break;
 
                     case "sell item":
                     case "sell":
                         showInventory(inventory, gold);
                         Item.listItems(items);
+                        // Item selectedItem = Item.getItem(items);
                         // something about an if (soldItem.Value - amount >= 0 {fucking don't lol})
                         break;
 

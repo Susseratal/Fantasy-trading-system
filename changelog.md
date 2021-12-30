@@ -11,6 +11,8 @@ Done:
         - [x] Items cost gold to buy
         - [x] Format inventory properly  
         - [x] Started expanding the items list
+        - [x] Can't buy things if you don't have enough gold
+        - [x] minor formatting changes
 
 To do:
         - [ ] Sell items
